@@ -24,7 +24,7 @@ vector<string> linesFromFile(string filename) {
 
 int main() {
 	vector<string> lines = linesFromFile("helloWorld.txt");
-	for (vector<string>::iterator it = lines.begin(); it < lines.end(); it++) {
+	for (vector<string>::iterator it = lines.begin(); it != lines.end(); it++) {
 		cout << (*it) << endl;
 	}
 	return 0;

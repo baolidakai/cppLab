@@ -1,31 +1,17 @@
 #include <iostream>
-#include <vector>
 #include <string>
-#include <sstream>
+#include <cctype>
+#include <algorithm>
 using namespace std;
 
-void printVector(vector<int>& data) {
-	for (vector<int>::iterator it = data.begin(); it < data.end(); it++) {
-		cout << (*it) << " ";
-	}
-	cout << endl;
-}
-
-void resizeVector(vector<int>& data, int newSize) {
-	data.resize(newSize);
-	printVector(data);
-}
-
-void resizeVector(vector<int>& data, int newSize, int newValue) {
-	data.resize(newSize, newValue);
-	printVector(data);
+void toLower(string& s) {
+	transform(s.begin(), s.end(), s.begin(), ::tolower);
 }
 
 int main() {
-	vector<int> myVec;
-	printVector(myVec);
-	resizeVector(myVec, 10);
-	resizeVector(myVec, 5, 5);
-	resizeVector(myVec, 10, 3);
+	string s = "Hello, world!";
+	cout << s << endl;
+	toLower(s);
+	cout << s << endl;
 	return 0;
 }

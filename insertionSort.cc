@@ -39,7 +39,7 @@ void readAndInsertionSort(vector<int>& data) {
 }
 
 void printVector(vector<int>& data) {
-	for (vector<int>::iterator it = data.begin(); it < data.end(); it++) {
+	for (vector<int>::iterator it = data.begin(); it != data.end(); it++) {
 		cout << (*it) << " ";
 	}
 	cout << endl;

@@ -195,7 +195,7 @@ bool playGameOnce(world& map) {
 	vector<Point> candidates; // Locations that are safe
 	vector<Point> strongCandidates; // Locations that are safe, and get closer to the food
 	int origDist = hamiltonDistance(head.row, head.col, foodRow, foodCol);
-	for (vector<Point>::iterator it = directions.begin(); it < directions.end(); it++) {
+	for (vector<Point>::iterator it = directions.begin(); it != directions.end(); it++) {
 		if (isSafe(map, (*it).row, (*it).col)) {
 			candidates.push_back(*it);
 			if (hamiltonDistance((*it).row, (*it).col, foodRow, foodCol) < origDist) {
