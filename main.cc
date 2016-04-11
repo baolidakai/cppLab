@@ -1,17 +1,18 @@
 #include <iostream>
 #include <string>
-#include <cctype>
-#include <algorithm>
 using namespace std;
 
-void toLower(string& s) {
-	transform(s.begin(), s.end(), s.begin(), ::tolower);
+class myFunctor {
+public:
+	void operator() (const string& str) const;
+};
+
+void myFunctor::operator() (const string& str) const {
+	cout << str << endl;
 }
 
 int main() {
-	string s = "Hello, world!";
-	cout << s << endl;
-	toLower(s);
-	cout << s << endl;
+	myFunctor functor;
+	functor("100");
 	return 0;
 }
