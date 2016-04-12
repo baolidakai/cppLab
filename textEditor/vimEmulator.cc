@@ -1,20 +1,12 @@
 /**
  * Simple text editor emulating vim
- * TODO:
- * Add more functions including search
- * substitute
- * Number
  */
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <cctype>
 #include <vector>
 #include <algorithm>
-#include <numeric>
-#include <cstdio>
-#include <cstdlib>
 #include <unistd.h>
 #include <termios.h>
 using namespace std;
@@ -58,9 +50,7 @@ int main() {
 	document doc = document(input);
 	while (true) {
 		char command = getch();
-		if (command != ':') {
-			doc.userCommand(command);
-		} else {
+		if (command == ':') {
 			cout << ':' << flush;
 			if (getch() == 'w') {
 				cout << 'w' << flush;
@@ -77,6 +67,13 @@ int main() {
 					}
 				}
 			}
+		} else if (command == 'Z') {
+			if (getch() == 'Z') {
+				doc.saveAs("");
+				return 0;
+			}
+		} else {
+			doc.userCommand(command);
 		}
 	}
 	return 0;
@@ -148,7 +145,12 @@ void document::insert(char c) {
 		if (cursorCol == 0 && cursorRow != 0) {
 			// Merge with the previous row
 			--cursorRow;
-			cursorCol = lines[cursorRow].size();
+			if (lines[cursorRow] == " ") {
+				lines[cursorRow] = "";
+				cursorCol = 0;
+			} else {
+				cursorCol = lines[cursorRow].size();
+			}
 			cursorColMax = cursorCol;
 			lines[cursorRow] += lines[cursorRow + 1];
 			lines.erase(lines.begin() + cursorRow + 1);
@@ -334,6 +336,7 @@ void document::userCommand(char c) {
 				break;
 			case 'G':
 				moveCursorBottom();
+				break;
 			default:
 				cout << "Invalid command!" << endl;
 		}
